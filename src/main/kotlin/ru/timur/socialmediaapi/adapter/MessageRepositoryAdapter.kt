@@ -9,16 +9,14 @@ import java.util.stream.Collectors
 
 @Component
 class MessageRepositoryAdapter(val messageRepository: MessageRepository, val messageMapper: MessageMapper) {
-    fun findBySenderAndRecipient(senderId: Int, recipientId: Int): List<MessageModel> {
-        return messageRepository!!.findBySenderAndRecipient(senderId, recipientId).stream().map { message: Message? ->
-            messageMapper!!.mapToModel(
-                message!!
-            )
-        }.collect(Collectors.toList())
-    }
+    fun findBySenderAndRecipient(senderId: Int, recipientId: Int): List<MessageModel> = messageRepository.findBySenderAndRecipient(senderId, recipientId).stream().map { message: Message? ->
+        messageMapper.mapToModel(
+            message!!
+        )
+    }.collect(Collectors.toList())
 
     fun save(messageModel: MessageModel): MessageModel {
-        messageRepository!!.save(messageMapper!!.mapToEntity(messageModel))
+        messageRepository.save(messageMapper.mapToEntity(messageModel))
         return messageModel
     }
 }

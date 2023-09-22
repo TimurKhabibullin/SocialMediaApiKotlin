@@ -33,16 +33,5 @@ class FriendshipService(val friendshipRepositoryAdapter: FriendshipRepositoryAda
         return friendshipModel
     }
 
-    fun findByUser1OrUser2(user1Id: Int, user2Id: Int): List<FriendshipModel> {
-        return friendshipRepositoryAdapter.findByUser1OrUser2(user1Id, user2Id)
-    }
-
-    fun findByUser1AndUser2(user1Id: Int, user2Id: Int): FriendshipModel {
-        return friendshipRepositoryAdapter.findByUser1AndUser2(user1Id, user2Id)
-    }
-
-    fun isFriends(senderId: Int, recipientId: Int): Boolean {
-        return friendshipRepositoryAdapter.findByUser1AndUser2(senderId, recipientId) != null ||
-                friendshipRepositoryAdapter.findByUser1AndUser2(recipientId, senderId) != null
-    }
+    fun findByUser1OrUser2(user1Id: Int, user2Id: Int): List<FriendshipModel> = friendshipRepositoryAdapter.findByUser1OrUser2(user1Id, user2Id)
 }

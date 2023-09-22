@@ -7,9 +7,7 @@ import ru.timur.socialmediaapi.core.model.PersonModel
 
 @Service
 class MessageService(val messageRepositoryAdapter: MessageRepositoryAdapter) {
-    fun sendMessage(messageModel: MessageModel?): MessageModel {
-        return messageRepositoryAdapter.save(messageModel!!)
-    }
+    fun sendMessage(messageModel: MessageModel?): MessageModel = messageRepositoryAdapter.save(messageModel!!)
 
     fun getMessages(user1: PersonModel, user2: PersonModel): List<MessageModel> {
         val messageModels: MutableList<MessageModel> = ArrayList()

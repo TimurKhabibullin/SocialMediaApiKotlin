@@ -64,7 +64,5 @@ class AuthController(val registrationService: RegistrationService, val personVal
         return ResponseEntity.status(HttpStatus.OK).body(java.util.Map.of("jwt-token", token))
     }
 
-    fun convertToPerson(personDTO: PersonDTO?): PersonModel {
-        return modelMapper.map(personDTO, PersonModel::class.java)
-    }
+    fun convertToPerson(personDTO: PersonDTO?): PersonModel = modelMapper.map(personDTO, PersonModel::class.java)
 }

@@ -25,9 +25,7 @@ class PostService(val postRepositoryAdapter: PostRepositoryAdapter) {
         return postRepositoryAdapter.save(post)
     }
 
-    fun findById(id: Int): PostModel {
-        return postRepositoryAdapter.findById(id)
-    }
+    fun findById(id: Int): PostModel = postRepositoryAdapter.findById(id)
 
     fun update(post: PostModel, id: Int): PostModel {
         val postToBeUpdated = findById(id)
@@ -42,7 +40,5 @@ class PostService(val postRepositoryAdapter: PostRepositoryAdapter) {
         return postToBeDeleted
     }
 
-    fun findAllByPersonId(personId: Int): List<PostModel> {
-        return postRepositoryAdapter.findAllByPerson(personId)
-    }
+    fun findAllByPersonId(personId: Int): List<PostModel> = postRepositoryAdapter.findAllByPerson(personId)
 }

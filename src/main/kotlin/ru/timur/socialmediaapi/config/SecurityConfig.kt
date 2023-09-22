@@ -54,21 +54,10 @@ class SecurityConfig (val personDetailsService: PersonDetailsService, val jwtFil
         return http.build()
     }
 
-
-    @Throws(Exception::class)
-    protected fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService<UserDetailsService>(personDetailsService)
-            .passwordEncoder(getPasswordEncoder())
-    }
-
     @Bean
-    fun getPasswordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun getPasswordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
     @Throws(Exception::class)
-    fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration): AuthenticationManager {
-        return authenticationConfiguration.getAuthenticationManager()
-    }
+    fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration): AuthenticationManager = authenticationConfiguration.getAuthenticationManager()
 }

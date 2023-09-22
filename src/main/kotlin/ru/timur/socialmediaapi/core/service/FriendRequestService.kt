@@ -9,7 +9,6 @@ import ru.timur.socialmediaapi.core.model.RequestStatusModel
 
 @Service
 class FriendRequestService(val friendRequestRepositoryAdapter: FriendRequestRepositoryAdapter, val friendshipRepositoryAdapter: FriendshipRepositoryAdapter) {
-
     fun sendFriendRequest(senderId: Int, recipientId: Int): FriendRequestModel {
         val friendRequestModel = FriendRequestModel()
         friendRequestModel.sender = senderId
@@ -26,7 +25,6 @@ class FriendRequestService(val friendRequestRepositoryAdapter: FriendRequestRepo
     fun acceptFriendRequest(friendRequestId: Int): FriendRequestModel {
         val friendRequestModel = friendRequestRepositoryAdapter.findById(friendRequestId)
 
-        // Создание дружбы между пользователями
         val friendshipModel = FriendshipModel(friendRequestModel.sender, friendRequestModel.recipient)
         friendshipModel.user1 = friendRequestModel.sender
         friendshipModel.user2 = friendRequestModel.recipient
@@ -41,13 +39,9 @@ class FriendRequestService(val friendRequestRepositoryAdapter: FriendRequestRepo
         return friendRequestModel
     }
 
-    fun getFriendRequestById(requestId: Int): FriendRequestModel {
-        return friendRequestRepositoryAdapter.findById(requestId)
-    }
+    fun getFriendRequestById(requestId: Int): FriendRequestModel = friendRequestRepositoryAdapter.findById(requestId)
 
-    fun findBySender(senderId: Int): List<FriendRequestModel> {
-        return friendRequestRepositoryAdapter.findBySender(senderId)
-    }
+    fun findBySender(senderId: Int): List<FriendRequestModel> = friendRequestRepositoryAdapter.findBySender(senderId)
 
     fun remove(friendRequestModel: FriendRequestModel?): FriendRequestModel? {
         friendRequestRepositoryAdapter.delete(friendRequestModel)

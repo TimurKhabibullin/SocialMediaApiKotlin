@@ -13,8 +13,10 @@ class Friendship() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Int? = null
+
     @Column(name = "user1_id")
     var user1: Int? = null
+
     @Column(name = "user2_id")
     var user2: Int? = null
 

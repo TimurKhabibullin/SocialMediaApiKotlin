@@ -40,11 +40,8 @@ class ActivityFeedController(val postService: PostService, val personDetailsServ
         val startIndex = pageNumber * pageSize
         val endIndex = min((startIndex + pageSize).toDouble(), posts.size.toDouble()).toInt()
 
-        // Проверка на выход за пределы списка
         return if (startIndex >= posts.size) {
             ArrayList()
         } else posts.subList(startIndex, endIndex)
-
-        // Получение подсписка с учетом пагинации
     }
 }

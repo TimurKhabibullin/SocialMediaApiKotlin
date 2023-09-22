@@ -34,9 +34,8 @@ class PostsController(val postService: PostService, val modelMapper: ModelMapper
     @Operation(summary = "Вывод всех постов")
     @GetMapping
     @SecurityRequirement(name = "bearerAuth")
-    fun showAll(): List<PostModel> {
-        return postService.showAll()
-    }
+    fun showAll(): List<PostModel> = postService.showAll()
+
 
     @Operation(summary = "Изменение поста")
     @PutMapping("/{id}")
@@ -58,15 +57,10 @@ class PostsController(val postService: PostService, val modelMapper: ModelMapper
     @Operation(summary = "Удаление поста")
     @DeleteMapping("/delete/{id}")
     @SecurityRequirement(name = "bearerAuth")
-    fun delete(@PathVariable id: Int): PostModel? {
-        return postService.delete(postService.findById(id))
-    }
+    fun delete(@PathVariable id: Int): PostModel? = postService.delete(postService.findById(id))
 
-    private fun converteToPost(postDTO: PostDTO?): PostModel {
-        return modelMapper.map(postDTO, PostModel::class.java)
-    }
+    private fun converteToPost(postDTO: PostDTO?): PostModel = modelMapper.map(postDTO, PostModel::class.java)
 
-    private fun converteToPost(postDTO: PostUpdateDTO?): PostModel {
-        return modelMapper.map(postDTO, PostModel::class.java)
-    }
+    private fun converteToPost(postDTO: PostUpdateDTO?): PostModel = modelMapper.map(postDTO, PostModel::class.java)
+
 }

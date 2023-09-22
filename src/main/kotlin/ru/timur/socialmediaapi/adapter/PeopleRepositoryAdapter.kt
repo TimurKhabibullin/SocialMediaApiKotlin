@@ -7,19 +7,9 @@ import ru.timur.socialmediaapi.db.repository.PeopleRepository
 
 @Component
 class PeopleRepositoryAdapter(val peopleRepository: PeopleRepository,val peopleMapper: PeopleMapper) {
-    fun findByUsername(username: String?): PersonModel {
-        return peopleMapper!!.mapToModel(peopleRepository!!.findByUsername(username).get())
-    }
+    fun findByUsername(username: String?): PersonModel = peopleMapper.mapToModel(peopleRepository.findByUsername(username).get())
 
-    fun findById(id: Int): PersonModel {
-        return peopleMapper!!.mapToModel(peopleRepository!!.findById(id).get())
-    }
+    fun findById(id: Int): PersonModel = peopleMapper.mapToModel(peopleRepository.findById(id).get())
 
-    fun save(personModel: PersonModel?) {
-        peopleRepository!!.save(peopleMapper!!.mapToEntity(personModel!!))
-    }
-
-    fun existsByEmail(email: String?): Boolean {
-        return peopleRepository!!.existsByEmail(email)
-    }
+    fun save(personModel: PersonModel?) = peopleRepository.save(peopleMapper.mapToEntity(personModel!!))
 }

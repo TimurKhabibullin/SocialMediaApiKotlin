@@ -6,8 +6,11 @@ import lombok.NoArgsConstructor
 
 class MessageModel() {
     var id: Int? = null
+
     var sender: Int? = null
+
     var recipient: Int? = null
+
     var text: String? = null
 
     constructor(id: Int?, sender: Int?, recipient: Int?, text: String?) : this() {

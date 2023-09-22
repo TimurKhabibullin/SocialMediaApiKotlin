@@ -14,25 +14,17 @@ class JWTUtil {
     @Value("\${jwt_secret}")
     val secret: String = ""
 
-    fun generateToken(username: String): String{
-        val expirationDate = Date.from(ZonedDateTime.now().plusMinutes(60).toInstant());
-
-        return JWT.create()
-            .withSubject("User details")
-            .withClaim("username", username)
-            .withIssuedAt(Date())
-            .withIssuer("spring-app")
-            .withExpiresAt(expirationDate)
-            .sign(Algorithm.HMAC256(secret));
-    }
+    fun generateToken(username: String): String = JWT.create()
+        .withSubject("User details")
+        .withClaim("username", username)
+        .withIssuedAt(Date())
+        .withIssuer("spring-app")
+        .withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(60).toInstant()))
+        .sign(Algorithm.HMAC256(secret))
 
     @Throws(JWTVerificationException::class)
-    fun validateTokenAndRetrieveClaim(token: String?): String {
-        val verifier = JWT.require(Algorithm.HMAC256(secret))
-            .withSubject("User details")
-            .withIssuer("spring-app")
-            .build()
-        val jwt = verifier.verify(token)
-        return jwt.getClaim("userName").asString()
-    }
+    fun validateTokenAndRetrieveClaim(token: String?): String = JWT.require(Algorithm.HMAC256(secret))
+        .withSubject("User details")
+        .withIssuer("spring-app")
+        .build().verify(token).getClaim("userName").asString()
 }

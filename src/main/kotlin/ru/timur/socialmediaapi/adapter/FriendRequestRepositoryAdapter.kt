@@ -11,17 +11,13 @@ import java.util.stream.Collectors
 class FriendRequestRepositoryAdapter(val friendRequestRepository: FriendRequestRepository,
                                      val friendRequestMapper: FriendRequestMapper) {
 
-    fun findById(id: Int): FriendRequestModel {
-        return friendRequestMapper.mapToModel(friendRequestRepository.findById(id).get())
-    }
+    fun findById(id: Int): FriendRequestModel = friendRequestMapper.mapToModel(friendRequestRepository.findById(id).get())
 
-    fun findBySender(senderId: Int): List<FriendRequestModel> {
-        return friendRequestRepository.findBySender(senderId).stream().map { friendRequest: FriendRequest? ->
-            friendRequestMapper.mapToModel(
-                friendRequest!!
-            )
-        }.collect(Collectors.toList())
-    }
+    fun findBySender(senderId: Int): List<FriendRequestModel> = friendRequestRepository.findBySender(senderId).stream().map { friendRequest: FriendRequest? ->
+        friendRequestMapper.mapToModel(
+            friendRequest!!
+        )
+    }.collect(Collectors.toList())
 
     fun save(friendRequestModel: FriendRequestModel): FriendRequestModel {
         friendRequestRepository.save(friendRequestMapper.mapToEntity(friendRequestModel))

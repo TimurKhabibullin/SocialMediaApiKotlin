@@ -14,12 +14,16 @@ class Person() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Int? = null
+
     @Column(name = "username")
     var username: String? = null
+
     @Column(name = "email")
     var email: String? = null
+
     @Column(name = "password")
     var password: String? = null
+
     @Column(name = "role")
     var role: String? = null
 

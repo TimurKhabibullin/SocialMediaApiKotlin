@@ -5,11 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import ru.timur.socialmediaapi.adapter.PeopleRepositoryAdapter
 import ru.timur.socialmediaapi.config.security.PersonDetails
 import ru.timur.socialmediaapi.core.model.PersonModel
-import java.util.*
+import java.util.Optional
+import kotlin.collections.ArrayList
 
 @Service
 class PersonDetailsService(val peopleRepositoryAdapter: PeopleRepositoryAdapter, val friendshipService: FriendshipService, val friendRequestService: FriendRequestService) : UserDetailsService {
@@ -21,18 +21,7 @@ class PersonDetailsService(val peopleRepositoryAdapter: PeopleRepositoryAdapter,
         return PersonDetails(person.get())
     }
 
-    fun findByUsername(username: String?): PersonModel {
-        return peopleRepositoryAdapter.findByUsername(username)
-    }
-
-    fun findByPersonId(id: Int): PersonModel {
-        return peopleRepositoryAdapter.findById(id)
-    }
-
-    @Transactional
-    fun edit(personModel: PersonModel?) {
-        peopleRepositoryAdapter.save(personModel)
-    }
+    fun findByPersonId(id: Int): PersonModel = peopleRepositoryAdapter.findById(id)
 
     fun getPersonPostsId(): List<Int?> {
         val authentication = SecurityContextHolder.getContext().authentication

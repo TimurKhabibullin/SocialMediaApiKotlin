@@ -14,14 +14,19 @@ class Post() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Int? = null
+
     @Column(name = "header")
     var header: String? = null
+
     @Column(name = "text")
     var text: String? = null
+
     @Column(name = "link_for_image")
     var linkForImage: String? = null
+
     @Column(name = "date_of_create")
     var dateOfCreate: Long? = null
+
     @Column(name = "person_id")
     var person: Int? = null
 

@@ -14,10 +14,13 @@ class FriendRequest() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     var id: Int? = null
+
     @Column(name = "sender_id")
     var sender: Int? = null
+
     @Column(name = "recipient_id")
     var recipient: Int? = null
+
     @Column(name = "status")
     var status: String? = null
 

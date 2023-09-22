@@ -29,37 +29,28 @@ class FriendController(val friendRequestService: FriendRequestService, val frien
     fun sendFriendRequest(
         @RequestParam(value = "senderId", required = false) senderId: Int?,
         @RequestParam(value = "recipientId", required = false) recipientId: Int?
-    ): FriendRequestModel {
-        return friendRequestService.sendFriendRequest(senderId!!, recipientId!!)
-    }
+    ): FriendRequestModel = friendRequestService.sendFriendRequest(senderId!!, recipientId!!)
+
 
     @Operation(summary = "Принятие заявки в друзья")
     @PostMapping("/requests/{requestId}/accept")
     @SecurityRequirement(name = "bearerAuth")
-    fun acceptFriendRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel {
-        return friendRequestService.acceptFriendRequest(friendRequestService.getFriendRequestById(requestId!!).id!!)
-    }
+    fun acceptFriendRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel = friendRequestService.acceptFriendRequest(friendRequestService.getFriendRequestById(requestId!!).id!!)
 
     @Operation(summary = "Отклонение заявки в друзья")
     @PostMapping("/requests/{requestId}/reject")
     @SecurityRequirement(name = "bearerAuth")
-    fun rejectFriendRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel {
-        return friendRequestService.rejectFriendRequest(friendRequestService.getFriendRequestById(requestId!!).id!!)
-    }
+    fun rejectFriendRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel = friendRequestService.rejectFriendRequest(friendRequestService.getFriendRequestById(requestId!!).id!!)
 
     @Operation(summary = "Удаление заявки в друзья")
     @DeleteMapping("/requests/{requestId}")
     @SecurityRequirement(name = "bearerAuth")
-    fun removeRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel? {
-        return friendRequestService.remove(friendRequestService.getFriendRequestById(requestId!!))
-    }
+    fun removeRequest(@PathVariable(value = "requestId", required = false) requestId: Int?): FriendRequestModel? = friendRequestService.remove(friendRequestService.getFriendRequestById(requestId!!))
 
     @Operation(summary = "Удаление дружбы")
     @DeleteMapping("/friendships/{friendshipId}")
     @SecurityRequirement(name = "bearerAuth")
-    fun removeFriendship(@PathVariable(value = "friendshipId", required = false) friendshipId: Int?): FriendshipModel {
-        return friendshipService.removeFriendship(friendshipService.getFriendshipById(friendshipId!!))
-    }
+    fun removeFriendship(@PathVariable(value = "friendshipId", required = false) friendshipId: Int?): FriendshipModel = friendshipService.removeFriendship(friendshipService.getFriendshipById(friendshipId!!))
 
     @Operation(summary = "Отправка сообщения")
     @PostMapping("/messages")
@@ -82,15 +73,8 @@ class FriendController(val friendRequestService: FriendRequestService, val frien
     fun getMessages(
         @RequestParam(value = "user1Id", required = false) user1Id: Int?,
         @RequestParam(value = "user2Id", required = false) user2Id: Int?
-    ): List<MessageModel> {
-        return messageService.getMessages(
-            personDetailsService.findByPersonId(user1Id!!), personDetailsService.findByPersonId(
-                user2Id!!
-            )
-        )
-    }
+    ): List<MessageModel> = messageService.getMessages(
+            personDetailsService.findByPersonId(user1Id!!), personDetailsService.findByPersonId(user2Id!!))
 
-    private fun converteToMessage(messageDTO: MessageDTO?): MessageModel {
-        return modelMapper.map(messageDTO, MessageModel::class.java)
-    }
+    private fun converteToMessage(messageDTO: MessageDTO?): MessageModel = modelMapper.map(messageDTO, MessageModel::class.java)
 }
